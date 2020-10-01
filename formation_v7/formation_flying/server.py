@@ -66,5 +66,5 @@ chart = ChartModule([{"Label": "Total Fuel Used", "Color": "Black"}],
                     data_collector_name='datacollector')
 server = ModularServer(FormationFlying, [formation_canvas, chart], "Formations", model_params)
 
-server.port = random.randrange(8500, 9000)
-server.launch()
+# server.port = random.randrange(8500, 9000)
+# server.launch()
