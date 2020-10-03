@@ -3,6 +3,7 @@
 # This file contains the drawing of the canvas for the visualization. It uses 
 # 'simple_continuous_canvas.js' which is a standard java script for continuous 
 # canvasses.
+#--test--
 # =============================================================================
 '''
 

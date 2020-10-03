@@ -9,7 +9,7 @@
 #    Different negotiation methods can be applied. In the parameter files one 
 #    can set 'negototiation_method' which defines which method will be used. 
 #    The base model only includes the greedy algorithm.
-#
+#--test--
 # =============================================================================
 '''
 
@@ -17,7 +17,7 @@ import numpy as np
 
 from mesa import Agent
 from .airports import Airport
-from ..negotiations.greedy import do_greedy # !!! Don't forget the others.
+from formation_flying.negotiations.greedy import do_greedy # !!! Don't forget the others.
 import math
 
 
@@ -467,3 +467,4 @@ class Flight(Agent):
         elif rest == 0:
             time = regular_time
         return (dist_self / time)
+

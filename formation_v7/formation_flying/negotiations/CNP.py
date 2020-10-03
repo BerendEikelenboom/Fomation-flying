@@ -1,6 +1,8 @@
 # =============================================================================
 # This file contains the function to do Contract Net Protocol (CNP). 
 # =============================================================================
+from typing import Any
+
 
 def do_CNP(flight):
     # the do_CNP function takes a flight-agent object
@@ -16,5 +18,11 @@ def do_CNP(flight):
 # -Remaining agents are assigned contractor
 # =============================================================================
 
-    for agent in flight:
+     # communication range: 1000 km defined in 'model'
+    # neighborhood = flight.get_neighbors(radius:communication_range)
+    # print ('Neighborhood', neighborhood)
+
+
+    print('Hello World') #test if Test-file functions at all
+
 

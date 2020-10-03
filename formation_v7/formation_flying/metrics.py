@@ -3,6 +3,7 @@
 # Data functions are saved here (instead of Model.py) for a better overview. 
 # These functions can be called upon by the DataCollector. 
 # You can add more advanced metric here!
+#--test--
 # =============================================================================
 '''
 def compute_total_fuel_used(model):
