@@ -102,6 +102,51 @@ class Flight(Agent):
         self.auctioneer = abs(1 - self.manager)
 
     # =============================================================================
+    #   Assign managers, based on neighbourhood. Agents with top 25% biggest neighbourhood become manager.
+    #   The others become contractors.
+    # =============================================================================
+
+    def assign_manager(self):
+        list_all_agents = [agent for agent in self.model.schedule.agents]
+        list_flying_agents = []
+        for agent in list_all_agents:
+            if type(agent) is Flight:
+                list_flying_agents.append(agent)
+
+        list_number_flying_neighbours = []
+        radius = 100
+
+        for agent in list_flying_agents:
+            neighbours = agent.model.space.get_neighbors(pos=agent.pos, radius=radius,
+                                                         include_center=True)
+            flying_neighbours = []
+            for neighbour in neighbours:
+                if type(neighbour) is Flight:
+                    flying_neighbours.append(neighbour)
+
+            number_neighbours_flying = len(flying_neighbours)
+            list_number_flying_neighbours.append(number_neighbours_flying)
+
+        number_managers = int(self.model.n_flights * 0.25)
+        list_number_flying_neighbours_sorted = np.sort(list_number_flying_neighbours)
+        treshold_manager = list_number_flying_neighbours_sorted[-number_managers]
+
+        self_all_neighbours = self.model.space.get_neighbors(pos=agent.pos, radius=radius,
+                                                         include_center=True)
+        self_flying_neighbours = []
+        for neighbour in self_all_neighbours:
+            if type(neighbour) is Flight:
+                self_flying_neighbours.append(neighbour)
+        self_number_flying_neighbours = len(self_flying_neighbours)
+
+        if self_number_flying_neighbours >= treshold_manager:
+            self.manager = 1
+            self.auctioneer = 0
+        else:
+            self.manager = 0
+            self.auctioneer = 1
+
+    # =============================================================================
     #   In advance, the agent moves (physically) to the next step (after having negotiated)
     # =============================================================================
     def advance(self):
@@ -313,7 +358,7 @@ class Flight(Agent):
     # =============================================================================
     #   This function finds the agents to make a bid to, and returns a list of these agents.
     #   In the current implementation, it randomly returns an agent, 
-    #   instead of deciding which manager it wants tomake a bid to.
+    #   instead of deciding which manager it wants to make a bid to.
     # =============================================================================
 
     def find_greedy_candidate(self):

@@ -8,7 +8,7 @@ def do_CNP(flight):
     # the do_CNP function takes a flight-agent object
 
     if not flight.departure_time:
-        raise Exception("The object passed to the greedy protocol has no departure time, therefore it seems that it is not a flight.")
+        raise Exception("The object passed to the CNP protocol has no departure time, therefore it seems that it is not a flight.")
 # =============================================================================
 # Step 1:  determining managers and contractors
 # Semiformal:
@@ -18,11 +18,10 @@ def do_CNP(flight):
 # -Remaining agents are assigned contractor
 # =============================================================================
 
+
      # communication range: 1000 km defined in 'model'
     # neighborhood = flight.get_neighbors(radius:communication_range)
     # print ('Neighborhood', neighborhood)
 
-
-    print('Hello World') #test if Test-file functions at all
 
 
