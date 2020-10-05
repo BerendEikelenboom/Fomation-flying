@@ -33,3 +33,32 @@ def new_formation_counter(model):
 
 def add_to_formation_counter(model):
     return model.add_to_formation_counter
+
+def output_metrics_CNP(model):
+
+
+    # FOR ENTIRE SYSTEM:
+    output_list_system = []
+
+    # amount of managers
+    number_managers = 0
+        if agent.manager == 1:
+        number_managers += 1
+
+    # amount of contractors
+
+
+
+
+
+    output_list_system.append(number_managers)
+
+
+
+
+    # FOR ALL FLIGHT AGENTS:
+
+
+    # FOR ALL MANAGERS:
+
+    # FOR ALL CONTRACTORS:

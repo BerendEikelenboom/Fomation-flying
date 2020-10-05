@@ -130,6 +130,7 @@ class FormationFlying(Model):
             self.schedule.add(flight)
 
 
+
     # =============================================================================
     #   Create all airports. The option "inactive_airports" gives you the 
     #   opportunity to have airports close later on in the simulation.

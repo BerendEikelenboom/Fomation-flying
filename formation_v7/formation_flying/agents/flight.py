@@ -368,7 +368,7 @@ class Flight(Agent):
         candidates = []
         for agent in neighbors:
             if type(agent) is Flight:
-                if agent.accepting_bids == 1:
+                if agent.accepting_bids == 1: #True is manager
                     if not self == agent:
                         # Pass if it is the current agent
                         candidates.append(agent)
@@ -378,6 +378,7 @@ class Flight(Agent):
         for i in candidates:
             managers.append(i.manager)
         print(managers)
+
 
     def find_greedy_candidate(self):
         neighbors = self.model.space.get_neighbors(pos=self.pos, radius=self.communication_range, include_center=True)
