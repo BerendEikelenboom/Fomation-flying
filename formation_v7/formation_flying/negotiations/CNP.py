@@ -9,19 +9,11 @@ def do_CNP(flight):
 
     if not flight.departure_time:
         raise Exception("The object passed to the CNP protocol has no departure time, therefore it seems that it is not a flight.")
-# =============================================================================
-# Step 1:  determining managers and contractors
-# Semiformal:
-# For first step (not at any time point):
-# -All agents determine neighborhood (the other agents that they can see)
-# -Agents with biggest neighborhood are assigned manager
-# -Remaining agents are assigned contractor
-# =============================================================================
 
+    # If contractor is not yet in a formation, start finding managers.
+    if flight.formation_state == 0:
+        formation_targets = flight.find_greedy_candidate()
 
-     # communication range: 1000 km defined in 'model'
-    # neighborhood = flight.get_neighbors(radius:communication_range)
-    # print ('Neighborhood', neighborhood)
 
 
 

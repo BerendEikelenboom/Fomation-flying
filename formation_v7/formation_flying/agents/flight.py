@@ -27,7 +27,6 @@ def calc_distance(p1, p2):
     dist = (((p1[0] - p2[0])**2 + (p1[1] - p2[1])**2) ** 0.5)
     return dist
 
-
 class Flight(Agent):
 
 
@@ -107,6 +106,7 @@ class Flight(Agent):
     # =============================================================================
 
     def assign_manager(self):
+        #Compute neighbours all agents
         list_all_agents = [agent for agent in self.model.schedule.agents]
         list_flying_agents = []
         for agent in list_all_agents:
@@ -131,13 +131,15 @@ class Flight(Agent):
         list_number_flying_neighbours_sorted = np.sort(list_number_flying_neighbours)
         treshold_manager = list_number_flying_neighbours_sorted[-number_managers]
 
-        self_all_neighbours = self.model.space.get_neighbors(pos=agent.pos, radius=radius,
+        #Compute own neighbours
+        self_all_neighbours = self.model.space.get_neighbors(pos=self.pos, radius=radius,
                                                          include_center=True)
         self_flying_neighbours = []
         for neighbour in self_all_neighbours:
             if type(neighbour) is Flight:
                 self_flying_neighbours.append(neighbour)
         self_number_flying_neighbours = len(self_flying_neighbours)
+
 
         if self_number_flying_neighbours >= treshold_manager:
             self.manager = 1
@@ -360,6 +362,22 @@ class Flight(Agent):
     #   In the current implementation, it randomly returns an agent, 
     #   instead of deciding which manager it wants to make a bid to.
     # =============================================================================
+
+    def find_CNP_candidate(self):
+        neighbors = self.model.space.get_neighbors(pos=self.pos, radius=self.communication_range, include_center=True)
+        candidates = []
+        for agent in neighbors:
+            if type(agent) is Flight:
+                if agent.accepting_bids == 1:
+                    if not self == agent:
+                        # Pass if it is the current agent
+                        candidates.append(agent)
+        print(candidates)
+        print((len(candidates)))
+        managers = []
+        for i in candidates:
+            managers.append(i.manager)
+        print(managers)
 
     def find_greedy_candidate(self):
         neighbors = self.model.space.get_neighbors(pos=self.pos, radius=self.communication_range, include_center=True)
